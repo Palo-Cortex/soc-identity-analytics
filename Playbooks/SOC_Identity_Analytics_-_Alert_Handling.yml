@@ -27,6 +27,7 @@ description: |-
   - Handles non-malicious alerts identified during the investigation.
 dirtyInputs: true
 id: 'SOC Identity Analytics - Alert Handling'
+adopted: true
 inputSections:
 - description: Investigation settings and data, including any deep dive incident investigation
     and verdict determination.

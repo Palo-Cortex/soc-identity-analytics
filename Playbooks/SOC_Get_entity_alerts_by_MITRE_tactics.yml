@@ -12,6 +12,7 @@ description: |-
   This playbook searches XDR alerts related to specific entities, on a given timeframe, based on MITRE tactics.
   Note: The playbook's inputs enable manipulating the execution flow. Read the input descriptions for details.
 id: 'SOC Get entity alerts by MITRE tactics'
+adopted: true
 inputs:
 - description: Set to True to hunt for identified alerts with MITRE Reconnaissance
     techniques.

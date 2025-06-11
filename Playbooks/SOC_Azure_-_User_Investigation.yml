@@ -21,6 +21,7 @@ description: |-
   - Uncommon high volume of actions
   - Action uncommonly performed by the user
 id: 'SOC Azure - User Investigation'
+adopted: true
 inputs:
 - description: The username to investigate.
   key: Username

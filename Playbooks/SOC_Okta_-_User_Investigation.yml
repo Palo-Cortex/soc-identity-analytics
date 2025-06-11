@@ -11,6 +11,7 @@ contentitemexportablefields:
 description: This playbook performs an investigation on a specific user, using queries
   and logs from Okta.
 id: 'SOC Okta - User Investigation'
+adopted: true
 inputs:
 - description: The user email to search Okta logs.
   key: UserEmail
