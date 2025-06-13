@@ -858,7 +858,7 @@ tasks:
               operator: notContainsGeneral
               right:
                 value:
-                  simple: =
+                  simple: '='
           root: Account.ID
     - incidentfield: Manager Email Address
       output:
@@ -982,7 +982,7 @@ tasks:
               operator: notContainsGeneral
               right:
                 value:
-                  simple: =
+                  simple: '='
           root: Account.ID
     - incidentfield: sAMAccountName
       output:
