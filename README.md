@@ -1,58 +1,57 @@
-# SOC Identity Analytics Playbooks (XSIAM)
+# SOC Identity Analytics – Pre-Work
 
-This repository contains Cortex XSIAM playbooks designed for identity-based threat detection and response within a Security Operations Center (SOC) environment. These playbooks focus on suspicious user behavior, privilege escalation, and lateral movement—empowering analysts to investigate identity-driven threats with context-rich, repeatable automation.
+This repository contains reusable XSIAM playbooks and automation aligned with the "Identity Analytics" use case in the SOC Framework. It enhances triage and response for suspicious identity-based alerts — helping SOC teams quickly evaluate authentication anomalies, suspicious user behavior, and cloud identity misuse.
 
-## Overview
+## 📌 Overview
 
-The playbooks in this repo:
-- Leverage the [soc-optimization](https://github.com/Palo-Cortex/soc-optimization) framework.
-- Begin with a standardized **"Upon Trigger"** playbook for consistent initial conditions.
-- Include safety features such as **Shadow Mode** and **Error Handling**.
+This use case focuses on alerts tied to the **MITRE ATT&CK tactic: Initial Access**, particularly identity-related scenarios. The playbooks leverage Cortex XSIAM’s native enrichment, user investigation, and verdict-handling capabilities to streamline incident response and reduce manual overhead.
 
-## Key Concepts
+### Step 2: Entry Point Playbook Structure
 
-### 1. Upon Trigger Playbook
+The `EP_InitialAccess` playbook routes identity-related alerts into the **Identity Analytics – Alert Handling** playbook, which performs the following stages:
 
-The first task of every parent playbook is to invoke the `Foundation - Upon Trigger` sub-playbook. This is a standardized routine imported from the `soc-optimization` framework.
+#### 🧪 Analysis
+- Enriches the associated **IP address** and **account username**
+- Provides context such as known risk history, user attributes, and asset value
 
-#### Purpose
-- Ensure a consistent playbook environment.
-- Set identity-specific context fields (e.g., user risk, asset roles).
-- **Activate Shadow Mode**, which is crucial for safe testing and development.
-- Establish context variables required for downstream enrichment and decisioning.
+#### 🔍 Investigation
+- Retrieves and evaluates related **XDR alerts** for the same user by MITRE tactic
+- Executes cloud-specific sub-playbooks:
+    - **Okta User Investigation** for suspicious SSO behavior or session misuse
+    - **Azure User Investigation** for anomalous login or privilege escalation attempts
 
-#### Shadow Mode
-When Shadow Mode is enabled:
-- All tasks that could modify identity infrastructure (e.g., disable user, reset password, revoke sessions) are **skipped or simulated**.
-- These tasks instead **print the intended action to the War Room**, allowing teams to validate logic before enabling in production.
+#### ✅ Verdict
+- Determines whether the behavior is **malicious** or **benign** based on enrichment and correlation
 
-#### Screenshot - Upon Trigger:
-![Upon Trigger Playbook](./images/UponTrigger.png)
+#### 🛡️ Verdict Handling
+- **Malicious:** Blocks IP, revokes sessions, and clears tokens
+- **Non-malicious:** Annotates alert and completes case handling without escalation
 
-#### Screenshot - Shadow Mode Example:
-![Shadow Mode](./images/ShadowMode.png)
+## 🧠 Why This Matters
+
+This playbook supports the XSIAM FieldOps Model’s value drivers:
+
+| Value Driver          | Capability Delivered                                                |
+|----------------------|---------------------------------------------------------------------|
+| Transformation        | Analysts are presented with enriched, context-rich identity cases   |
+| Risk & Resiliency     | Identity anomalies tied to Initial Access are handled proactively    |
+| Automation & Efficacy | Triage, enrichment, and verdict handling are streamlined and scalable |
+
+## 🧪 Validation Tips
+
+To confirm the configuration is working as expected:
+
+- Trigger an alert mapped to `TA0001 - Initial Access` tied to a known user/IP
+- Confirm enrichment pulls identity and IP context into the case
+- Review verdict and ensure appropriate playbook actions (block, revoke, or close) are taken
+- Track outcome metrics in the **SOC Framework Value Dashboard**
+
+## 🧩 Dependencies
+
+- SOC Optimization Framework (for auto-triage, scoring, and layout handling)
+- Identity provider integrations (e.g., Okta, Azure AD) configured and ingesting events
+- Alerts must include `username`, `source IP`, and `mitre_tactic_id` for full workflow execution
 
 ---
 
-### 2. Error Handling
-
-All playbooks call a standard `Error Handler` sub-playbook to:
-- Log task failures
-- Print tracebacks to the War Room
-- Flag incidents for manual review when critical automation fails
-
-#### Screenshot - Error Handling:
-![Error Handling](./images/ErrorHandling.png)
-
----
-
-## Requirements
-
-- Cortex XSIAM v2.5+
-- Identity telemetry sources (e.g., Okta, Azure AD, O365 logs)
-- Dependencies outlined in the [soc-optimization](https://github.com/Palo-Cortex/soc-optimization) repo
-
----
-
-## Dependency Graph
-![SOC Identity Analytics Dependencies.png](images/SOC%20Identity%20Analytics%20Dependencies.png)
+For enhancement suggestions or integration support, contact your Palo Alto Networks Field team or the SOC Framework maintainers.
