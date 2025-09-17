@@ -17,80 +17,80 @@ inputs:
 - description: Set to True to hunt for identified alerts with MITRE Reconnaissance
     techniques.
   key: HuntReconnaissanceTechniques
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: "False"
 - description: Set to True to hunt for identified alerts with MITRE Initial Access
     techniques.
   key: HuntInitialAccessTechniques
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: "False"
 - description: Set to True to hunt for identified alerts with MITRE Execution techniques.
   key: HuntExecutionTechniques
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: "False"
 - description: Set to True to hunt for identified alerts with MITRE Persistence techniques.
   key: HuntPersistenceTechniques
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: "False"
 - description: Set to True to hunt for identified alerts with MITRE Privilege Escalation
     techniques.
   key: HuntPrivilegeEscalationTechniques
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: "False"
 - description: Set to True to hunt for identified alerts with MITRE Defense Evasion
     techniques.
   key: HuntDefenseEvasionTechniques
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: "False"
 - description: Set to True to hunt for identified alerts with MITRE Discovery techniques.
   key: HuntDiscoveryTechniques
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: "False"
 - description: Set to True to hunt for identified alerts with MITRE Lateral Movement
     techniques.
   key: HuntLateralMovementTechniques
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: "False"
 - description: Set to True to hunt for identified alerts with MITRE Collection techniques
     .
   key: HuntCollectionTechniques
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: "False"
 - description: Set to True to hunt for identified alerts with MITRE Command and Control
     techniques.
   key: HuntCnCTechniques
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: "False"
 - description: Set to True to hunt for identified alerts with MITRE Impact techniques.
   key: HuntImpactTechniques
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: "False"
 - description: Set to True to hunt for identified alerts with MITRE Credential Access
     techniques.
   key: HuntCredentialAccessTechniques
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: "False"
@@ -102,25 +102,25 @@ inputs:
     * 4 hours
     * 8 days
   key: timeRange
-  playbookInputQuery: null
+  playbookInputQuery:
   required: true
   value:
     simple: 6 hours
 - description: Whether to run all the sub-tasks for Mitre Tactics.
   key: RunAll
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: "True"
 - description: Entity type to search. Entity type can be username, hostname, or any
     other element that exists in the alert.
   key: EntityType
-  playbookInputQuery: null
+  playbookInputQuery:
   required: true
   value: {}
 - description: Entity value.
   key: EntityID
-  playbookInputQuery: null
+  playbookInputQuery:
   required: true
   value: {}
 name: SOC Get entity alerts by MITRE tactics
@@ -262,11 +262,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 4a1fbd27-f959-46c8-a122-d67df6c68012
       iscommand: false
       name: Set initial query
@@ -321,11 +321,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 960a7348-ca20-49c0-95dc-c2efa9e5e9c0
       iscommand: false
       name: Add Reconnaissance to query
@@ -477,11 +477,11 @@ tasks:
       brand: ""
       description: "Searches Demisto alerts. A summarized version of this scrips is
         avilable with the summarizedversion argument.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 424faf63-da8a-4378-8893-7d99c89e1670
       iscommand: false
       name: Hunt techniques
@@ -591,11 +591,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: d9a32f74-62d1-4c3a-b8f3-4b693304aee6
       iscommand: false
       name: Add Command and Control to query
@@ -1500,11 +1500,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: f48e9d20-fb95-4191-b3e6-9fcf80834c66
       iscommand: false
       name: Add Initial Access to query
@@ -1559,11 +1559,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: fb49bccd-fd2d-4b88-ae81-41ebcd7e7aa4
       iscommand: false
       name: Add Execution to query
@@ -1618,11 +1618,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 18e1c609-4b44-4084-9a7f-88427fbfce50
       iscommand: false
       name: Add Persistence to query
@@ -1677,11 +1677,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 56c06df9-d98c-459f-a922-b9a02659756c
       iscommand: false
       name: Add Privilege Escalation to query
@@ -1736,11 +1736,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 414f40f1-4e9b-4444-ab3a-ecf1c96e0ca7
       iscommand: false
       name: Add Defense Evasion to query
@@ -1795,11 +1795,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: b18fde6f-c57a-4fa2-9ab5-549f12cdd1b1
       iscommand: false
       name: Add Credential Access to query
@@ -1854,11 +1854,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: fd9051d2-5f73-458c-bf45-b8772ba33b7c
       iscommand: false
       name: Add Discovery to query
@@ -1913,11 +1913,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 8b1ebd24-59c1-4064-b103-7f6afdf5815e
       iscommand: false
       name: Add Lateral Movement to query
@@ -1972,11 +1972,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 2ac93f87-a58d-4ca7-ae94-f54efa59fcee
       iscommand: false
       name: Add Collection to query
@@ -2031,11 +2031,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 5d308fc9-8a72-4f21-b8a1-b9587835744c
       iscommand: false
       name: Add Impact to query
@@ -2318,11 +2318,11 @@ tasks:
       brand: ""
       description: "Searches Demisto alerts. A summarized version of this scrips is
         avilable with the summarizedversion argument.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 6f96af53-0c12-4b00-ad46-caf154fabc47
       iscommand: false
       name: Hunt all techniques
@@ -2380,3 +2380,4 @@ view: |-
       }
     }
   }
+fromversion: 5.0.0

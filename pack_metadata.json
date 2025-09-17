@@ -3,7 +3,7 @@
     "id": "soc-identity-analytics",
     "description": "This contains the same content as the OTTB Identity Analytics - Alert Handling with the soc-optimization (or SOC Framework) patterns.",
     "support": "community",
-    "currentVersion": "1.0.2",
+    "currentVersion": "1.0.3",
     "author": "Scott Brumley",
     "url": "https://github.com/Palo-Cortex/soc-identity-analytics",
     "email": "sbrumley@paloaltonetworks.com",
