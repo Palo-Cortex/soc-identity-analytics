@@ -25,27 +25,27 @@ adopted: true
 inputs:
 - description: The username to investigate.
   key: Username
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value: {}
 - description: 'The Search Time for the Azure Log Analytics search query. Default
     value: ago(1d)'
   key: AzureSearchTime
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: ago(7d)
 - description: The threshold number of failed logons by the user. Required to determine
     how many failed logon events count as suspicious events.
   key: failedLogonThreshold
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: "20"
 - description: The threshold number of MFA failed logons by the user. Required to
     determine how many MFA failed logon events count as suspicious events.
   key: MfaAttemptThreshold
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value:
     simple: "10"
@@ -588,9 +588,9 @@ tasks:
       extend-context:
         simple: AzureAnomalies=
       query:
-        simple: "Anomalies \n| where UserPrincipalName ==  @\"${inputs.Username}\"\n|
-          where TimeGenerated >  ${inputs.AzureSearchTime}\n| summarize Count = count(),
-          Events = make_list(AnomalyDetails)"
+        simple: "Anomalies \n| where UserPrincipalName ==  @\"${inputs.Username}\"\
+          \n| where TimeGenerated >  ${inputs.AzureSearchTime}\n| summarize Count
+          = count(), Events = make_list(AnomalyDetails)"
     separatecontext: false
     skipunavailable: true
     task:
@@ -631,8 +631,8 @@ tasks:
         simple: AzureNumOfFailLogin=
       query:
         simple: "SigninLogs \n| where parse_json(Status) contains \"fail\"\n| where
-          UserPrincipalName == @\"${inputs.Username}\"\n| where TimeGenerated > ${inputs.AzureSearchTime}\n|
-          summarize ActionCount = count() by UserPrincipalName\n| where ActionCount
+          UserPrincipalName == @\"${inputs.Username}\"\n| where TimeGenerated > ${inputs.AzureSearchTime}\n
+          | summarize ActionCount = count() by UserPrincipalName\n| where ActionCount
           > ${inputs.failedLogonThreshold}\n| summarize Count = count()"
     separatecontext: false
     skipunavailable: true
@@ -679,8 +679,8 @@ tasks:
           == @\"${inputs.Username}\" \n| where AdditionalDetails[0].value contains
           \"python\" or AdditionalDetails[0].value contains \"curl\" or AdditionalDetails[0].value
           contains \"axios\" or AdditionalDetails[0].value contains \"httpie\" or
-          AdditionalDetails[0].value contains \"wget\"\n| where TimeGenerated > ${inputs.AzureSearchTime}\n|
-          summarize Count = count(), Events = make_list(AdditionalDetails)"
+          AdditionalDetails[0].value contains \"wget\"\n| where TimeGenerated > ${inputs.AzureSearchTime}\n
+          | summarize Count = count(), Events = make_list(AdditionalDetails)"
     separatecontext: false
     skipunavailable: true
     task:
@@ -720,13 +720,14 @@ tasks:
       extend-context:
         simple: AzureSuccessSecurityRulesChange=
       query:
-        simple: "AzureActivity\n| where OperationName in (\"Delete Security Rule\",\"Create
-          or Update Security Rule\",\"Update Alert Rules\",\"Delete Alert Rules\",\"Delete
-          Watchlists\",\"Update Watchlists\",\"Microsoft.SecurityInsights/watchlists/watchlistItems/delete\",\"Create
-          or Update Application Gateway WAF Policy\",\"Delete Application Gateway
-          WAF Policy\",\"Update database threat detection policy\")\n| where ActivityStatus
-          == \"Succeeded\"\n| where Caller ==  @\"${inputs.Username}\" \n| where TimeGenerated
-          > ${inputs.AzureSearchTime}\n| summarize Count = count(), Events = make_list(OperationName)"
+        simple: "AzureActivity\n| where OperationName in (\"Delete Security Rule\"\
+          ,\"Create or Update Security Rule\",\"Update Alert Rules\",\"Delete Alert
+          Rules\",\"Delete Watchlists\",\"Update Watchlists\",\"Microsoft.SecurityInsights/watchlists/watchlistItems/delete\"\
+          ,\"Create or Update Application Gateway WAF Policy\",\"Delete Application
+          Gateway WAF Policy\",\"Update database threat detection policy\")\n| where
+          ActivityStatus == \"Succeeded\"\n| where Caller ==  @\"${inputs.Username}\"\
+          \ \n| where TimeGenerated > ${inputs.AzureSearchTime}\n| summarize Count
+          = count(), Events = make_list(OperationName)"
     separatecontext: false
     skipunavailable: true
     task:
@@ -766,13 +767,14 @@ tasks:
       extend-context:
         simple: AzureUnsuccessSecurityRulesChange=
       query:
-        simple: "AzureActivity\n| where OperationName in (\"Delete Security Rule\",\"Create
-          or Update Security Rule\",\"Update Alert Rules\",\"Delete Alert Rules\",\"Delete
-          Watchlists\",\"Update Watchlists\",\"Microsoft.SecurityInsights/watchlists/watchlistItems/delete\",\"Create
-          or Update Application Gateway WAF Policy\",\"Delete Application Gateway
-          WAF Policy\",\"Update database threat detection policy\")\n| where ActivityStatus
-          != \"Succeeded\"\n| where Caller ==  @\"${inputs.Username}\" \n| where TimeGenerated
-          > ${inputs.AzureSearchTime}\n| summarize Count = count(), Events = make_list(OperationName)"
+        simple: "AzureActivity\n| where OperationName in (\"Delete Security Rule\"\
+          ,\"Create or Update Security Rule\",\"Update Alert Rules\",\"Delete Alert
+          Rules\",\"Delete Watchlists\",\"Update Watchlists\",\"Microsoft.SecurityInsights/watchlists/watchlistItems/delete\"\
+          ,\"Create or Update Application Gateway WAF Policy\",\"Delete Application
+          Gateway WAF Policy\",\"Update database threat detection policy\")\n| where
+          ActivityStatus != \"Succeeded\"\n| where Caller ==  @\"${inputs.Username}\"\
+          \ \n| where TimeGenerated > ${inputs.AzureSearchTime}\n| summarize Count
+          = count(), Events = make_list(OperationName)"
     separatecontext: false
     skipunavailable: true
     task:
@@ -815,10 +817,10 @@ tasks:
         simple: "false"
       query:
         simple: "AuditLogs\n| where parse_json(tostring(InitiatedBy.user)).userPrincipalName
-          ==  @\"${inputs.Username}\" \n| where Category in (\"ApplicationManagement\",
-          \"UserManagement\", \"PolicyManagement\", \"GroupManagement\")| where Result
-          == \"success\"\n| where TimeGenerated > ${inputs.AzureSearchTime}\n| summarize
-          Count = count(), Events = make_list(OperationName)"
+          ==  @\"${inputs.Username}\" \n| where Category in (\"ApplicationManagement\"\
+          , \"UserManagement\", \"PolicyManagement\", \"GroupManagement\")| where
+          Result == \"success\"\n| where TimeGenerated > ${inputs.AzureSearchTime}\n
+          | summarize Count = count(), Events = make_list(OperationName)"
     separatecontext: false
     skipunavailable: true
     task:
@@ -856,11 +858,13 @@ tasks:
     quietmode: 0
     scriptarguments:
       keys:
-        simple: AzureScriptBasedUserAgentCount,AzureAdminActivitiesCount,AzureSecurityRulesChangeCount,AzureUnsuccessSecurityRulesChangeCount,AzureAnomaliesCount,AzureUncommonCountryLogonCount,AzureUncommonVolumeCount,AzureUncommonActivitiesCount
+        simple: 
+          AzureScriptBasedUserAgentCount,AzureAdminActivitiesCount,AzureSecurityRulesChangeCount,AzureUnsuccessSecurityRulesChangeCount,AzureAnomaliesCount,AzureUncommonCountryLogonCount,AzureUncommonVolumeCount,AzureUncommonActivitiesCount
       parent:
         simple: CountAzureEvents
       values:
-        simple: ${AzureScriptBasedUserAgent.tables.rows.[0].[0]},${AzureAdminActivities.tables.rows.[0].[0]},${AzureSuccessSecurityRulesChange.tables.rows.[0].[0]},${AzureUnsuccessSecurityRulesChange.tables.rows.[0].[0]},${AzureAnomalies.tables.rows.[0].[0]},${AzureUncommonCountryLogon.tables.rows.[0].[0]},${AzureUncommonVolume.tables.rows.[0].[0]},${AzureUncommonActivities.tables.rows.[0].[0]}
+        simple: 
+          ${AzureScriptBasedUserAgent.tables.rows.[0].[0]},${AzureAdminActivities.tables.rows.[0].[0]},${AzureSuccessSecurityRulesChange.tables.rows.[0].[0]},${AzureUnsuccessSecurityRulesChange.tables.rows.[0].[0]},${AzureAnomalies.tables.rows.[0].[0]},${AzureUncommonCountryLogon.tables.rows.[0].[0]},${AzureUncommonVolume.tables.rows.[0].[0]},${AzureUncommonActivities.tables.rows.[0].[0]}
     separatecontext: false
     skipunavailable: false
     task:
@@ -901,8 +905,8 @@ tasks:
         simple: AzureNumOfFailMFA=
       query:
         simple: "SigninLogs \n| where ResultType =~ \"50074\"\n| where UserPrincipalName
-          == @\"${inputs.Username}\"\n| where TimeGenerated > ${inputs.AzureSearchTime}\n|
-          summarize ActionCount = count() by UserPrincipalName\n| where ActionCount
+          == @\"${inputs.Username}\"\n| where TimeGenerated > ${inputs.AzureSearchTime}\n
+          | summarize ActionCount = count() by UserPrincipalName\n| where ActionCount
           > ${inputs.MfaAttemptThreshold}"
     separatecontext: false
     skipunavailable: true
@@ -952,11 +956,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 55c039fd-72c3-4735-8a93-050f7acf9435
       iscommand: false
       name: Set script-based user agent events
@@ -1000,11 +1004,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 92abd1bf-dd4d-45e3-8533-ee4070e7a4ec
       iscommand: false
       name: Set administrative events
@@ -1048,11 +1052,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 084a0a82-552b-4bb2-89fe-8eea5836941b
       iscommand: false
       name: Set security rules changed events
@@ -1096,11 +1100,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 166af766-ae88-4eff-9714-707388803844
       iscommand: false
       name: Set attempt to change security rules events
@@ -1144,11 +1148,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: d980c04f-84bb-4318-97a6-1a6d0fb9bd2e
       iscommand: false
       name: Set anomalies events
@@ -1192,11 +1196,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 8aa0e5ae-e2e6-4072-ab18-2589c20e07cd
       iscommand: false
       name: Set event of logon attempt from uncommon country
@@ -1240,11 +1244,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: f0c4a582-68bc-4718-832d-578e0ac221d6
       iscommand: false
       name: Set events of uncommon high volume of actions
@@ -1288,11 +1292,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: f2a2ad6e-20f6-4d9b-9947-568434b1f5c8
       iscommand: false
       name: Set events of action uncommonly performed by the user
@@ -1363,11 +1367,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 1e454124-f3da-4bf3-826d-ffcafb136e42
       iscommand: false
       name: Set the number of failed login attempts by the user
@@ -1418,11 +1422,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 2f198428-6465-4d7f-a84e-24690b544e87
       iscommand: false
       name: Set the number of failed login MFA by the user
@@ -1473,11 +1477,11 @@ tasks:
       brand: ""
       description: "Set a value in context under the key you entered. If no value
         is entered, the script doesn't do anything.\n\nThis automation runs using
-        the default Limited User role, unless you explicitly change the permissions.\nFor
-        more information, see the section about permissions here:\n- For Cortex XSOAR
-        6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
-        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
-        For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
+        the default Limited User role, unless you explicitly change the permissions.\n
+        For more information, see the section about permissions here:\n- For Cortex
+        XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+        \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n
+        - For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
       id: 9be98846-76cd-4592-917d-dc639634669c
       iscommand: false
       name: Set the number that the user was defined as a risky user
@@ -1719,3 +1723,4 @@ view: |-
       }
     }
   }
+fromversion: 5.0.0

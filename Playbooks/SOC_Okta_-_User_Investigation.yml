@@ -15,19 +15,19 @@ adopted: true
 inputs:
 - description: The user email to search Okta logs.
   key: UserEmail
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value: {}
 - description: |-
     The Country code from which the user logged in.
     Country Code Alpha 2 (Example: US)
   key: LoginCountry
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value: {}
 - description: The ASN from which the user logged in.
   key: ASN
-  playbookInputQuery: null
+  playbookInputQuery:
   required: false
   value: {}
 name: SOC Okta - User Investigation
@@ -1822,3 +1822,4 @@ view: |-
       }
     }
   }
+fromversion: 5.0.0
