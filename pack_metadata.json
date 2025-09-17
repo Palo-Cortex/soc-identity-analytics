@@ -2,19 +2,20 @@
     "name": "SOC Identity Analytics - Alert Handling",
     "id": "soc-identity-analytics",
     "description": "This contains the same content as the OTTB Identity Analytics - Alert Handling with the soc-optimization (or SOC Framework) patterns.",
-    "support": "community",
-    "currentVersion": "1.0.3",
-    "author": "Scott Brumley",
-    "url": "https://github.com/Palo-Cortex/soc-identity-analytics",
-    "email": "sbrumley@paloaltonetworks.com",
+    "support": "xsoar",
+    "currentVersion": "1.0.4",
+    "author": "Cortex XSOAR",
+    "url": "https://www.paloaltonetworks.com/cortex",
     "categories": [],
     "tags": [
         "SOC",
+        "SOC_Framework",
+        "Utility",
+        "Palo Alto Networks Products",
         "Identity And Access Management"],
     "useCases": [],
     "keywords": [],
     "marketplaces": [
-        "xsoar",
         "marketplacev2"
     ]
 }
